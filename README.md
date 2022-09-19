@@ -39,8 +39,30 @@ This assumes you have a Linux server with Apache, MySQL and PHP operational. Thi
 
 Installation requires several simple steps.
 
+**1. Clone the repository or get a copy of the source archive**
+
+In this installation the source is located in /opt/axtparts4 and the site symlinked into the web docroot. 
+This method is used to allow updated versions to be retrieved into separate directories and symlinked into operation to test without disruption.
+
+**Using git to clone the repository**
+```
+$ cd /opt
+$ git clone https://github.com/gswan/axtparts.git axtparts4
+$ cd axtparts4
+```
+**Using a source tarball**
+```
+$ cd /opt
+$ tar -xf axtparts-4.0.tar.gz 
+$ cd axtparts4
+```
+
+
+**2. Database.**
+
 * Create the database using the database schema file
 ```
+$ cd /opt/axtparts4/sql
 $ mysql -uroot -p < axtparts-schema.sql
 ```
 * Import the initial data. 
@@ -48,81 +70,91 @@ $ mysql -uroot -p < axtparts-schema.sql
 The initial data file can be edited to set your own part categories and footprints to start with. 
 It includes an admin user with default initial password 'mypassword!'. This can be changed once logged in, and additional users created.
 ```
+$ cd /opt/axtparts4/sql
 $ mysql -uroot -p < axtparts-initialdata.sql
 ```
+* Create a user with privileges to work with the axtparts database.
 
-Now create a user with privileges to work with the 
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
+The user information must be entered into the axtparts configuration file in a later step so make a note of the password used here.
+In this case the connection is via 127.0.0.1 on a TCP socket. If you prefer to use Unix sockets for connection then use 'localhost' instead as the hostname.
 ```
-Give the example
+$ mysql -uroot -p mysql
+mysql> grant insert,update,select,delete on axtparts.* to 'axtpartsuser'@'127.0.0.1' identified by 'PASSWORD';
+mysql> flush privileges;
+mysql> exit;
 ```
+*Note: This example shows command-line installation, however a GUI database manager (like phpMyAdmin) could also be used to perform the same tasks.*
+
+
+**3. Web application.**
+Edit the config file in /opt/axtparts4/axtparts/config/config-axtparts.php to set the correct database connection parameters. 
+Other configuration parameters can also be set here (company information and partprefix).
+```
+define ("PARTSUSER", "axtpartsuser");
+define ("PARTSPASSWD", "DB_PASSWORD");
+define ("PARTSHOST", "127.0.0.1");
+define ("PARTSDBASE", "axtparts");
+```
+
+Link the web application into the web docroot for your apache server. In this example we are using /var/www/https as the docroot for the http-ssl server.
+```
+$ cd /opt/axtparts4
+$ mkdir -pv datasheets
+$ sudo mkdir -pv /var/axtparts/{swimages,engdocs,mfgdocs}
+$ sudo chown -R apache.apache /opt/axtparts4/axtparts/datasheets
+$ sudo chown -R apache.apache /var/axtparts
+$ ln -s /opt/axtparts4/axtparts /var/www/axtparts
+```
+Now you should be able to use your web browser to connect to the site and log in using the default admin user and password.
+
 
 #### Upgrading from Version 3
+The database has not changed and version 3 is a simple upgrade to version 4.
 
-And repeat
-
+The only adjustment that must be made is the location of the datasheets directory. It is now within the web application directory.
+**Using git to clone the repository**
 ```
-until finished
+$ cd /opt
+$ git clone https://github.com/gswan/axtparts.git axtparts4
+$ cd axtparts4
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
+**Using a source tarball**
 ```
-Give an example
+$ cd /opt
+$ tar -xf axtparts-4.0.tar.gz 
+$ cd axtparts4
+```
+Copy the existing datasheets directory to the new application. It is assumed here that the existing application is in /var/www/https/axtparts/.
+```
+$ cp -a /var/www/https/axtparts/datasheets /opt/axtparts4/axtparts/datasheets
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
+Edit the config file in /opt/axtparts4/axtparts/config/config-axtparts.php to set the correct database connection parameters. 
+These and other configuration parameters can be copied from your existing installation config file.
 ```
-Give an example
+define ("PARTSUSER", "axtpartsuser");
+define ("PARTSPASSWD", "DB_PASSWORD");
+define ("PARTSHOST", "127.0.0.1");
+define ("PARTSDBASE", "axtparts");
 ```
 
-## Deployment
+Link the web application into the web docroot for your apache server. In this example we are using /var/www/https as the docroot for the http-ssl server.
+Since the existing application is located in axtparts/ we will move this to axtparts3/ and link the new installation to axtparts/
+```
+$ cd /opt/axtparts4
+$ sudo mv /var/www/https/axtparts /var/www/https/axtparts3
+$ ln -s /opt/axtparts4/axtparts /var/www/axtparts
+```
+Now you should be able to use your web browser to connect to the site and log in using existing user credentials.
 
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Geoff Swan** - *Initial work* - [AXT Systems](https://github.com/gswan)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/gswan/axtparts/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GPL 3.0 License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
