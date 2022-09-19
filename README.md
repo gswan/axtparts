@@ -31,9 +31,9 @@ These versions are currently used/tested but it is also likely to work with othe
 * Apache: 2.4
 
 
-### Installation
+## Installation
 
-#### Fresh Install for new systems
+### Fresh Install for new systems
 
 This assumes you have a Linux server with Apache, MySQL and PHP operational. This may be Fedora, Arch-Linux, Ubuntu or whatever.
 
@@ -107,8 +107,8 @@ $ ln -s /opt/axtparts4/axtparts /var/www/axtparts
 ```
 Now you should be able to use your web browser to connect to the site and log in using the default admin user and password.
 
-
-#### Upgrading from Version 3
+---
+### Upgrading from Version 3
 The database has not changed and version 3 is a simple upgrade to version 4.
 
 The only adjustment that must be made is the location of the datasheets directory. It is now within the web application directory.
@@ -147,14 +147,13 @@ $ ln -s /opt/axtparts4/axtparts /var/www/axtparts
 ```
 Now you should be able to use your web browser to connect to the site and log in using existing user credentials.
 
-
+---
 ## Authors
 
-* **Geoff Swan** - *Initial work* - [AXT Systems](https://github.com/gswan)
+* **Geoff Swan** - *Initial releases* - [AXT Systems](https://axtsystems.com)
 
-See also the list of [contributors](https://github.com/gswan/axtparts/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the GPL 3.0 License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GPL 3.0 License - see the [LICENSE](LICENSE) file for details
 
