@@ -248,7 +248,7 @@ $url = $formfile.$urlargs;
     <form class="form-container form-pop-stock" name="form-stock" id="form-stock" action="<?php print $url ?>" method="post" onsubmit='return deleteCheck()'>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-stock" for="qty">Quantity</label>
-		<input value="<?php print htmlentities($qty) ?>" name="qty" type="text" class="input-formelement" form="form-stock" maxlength="10" title="Stock quantity">
+		<input value="<?php print htmlentities($qty) ?>" name="qty" type="text" class="input-formelement" form="form-stock" maxlength="8" title="Stock quantity">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-stock" for="sel-locid">Location</label>
@@ -258,7 +258,7 @@ $url = $formfile.$urlargs;
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-stock" for="note">Note</label>
-		<input value="<?php print htmlentities($note) ?>" name="note" type="text" class="input-formelement" form="form-stock" maxlength="60" title="Notes">
+		<input value="<?php print htmlentities($note) ?>" name="note" type="text" class="input-formelement" form="form-stock" maxlength="64" title="Notes">
 	  </div>
       <div class="container container-pop-btn">
 	    <button type="submit" class="btn-pop-update" form="form-stock" formaction="<?php print $url ?>" value="Save" name="btn_save" id="btn_save" onclick="delClear()">Save</button>

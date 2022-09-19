@@ -208,7 +208,7 @@ $url = $formfile.$urlargs;
     <form class="form-container form-pop-category" name="form-category" id="form-category" action="<?php print $url ?>" method="post" onsubmit='return deleteCheck()'>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-category" for="catdescr">Part Category</label>
-		<input value="<?php print htmlentities($catdescr) ?>" name="catdescr" type="text" class="input-formelement" form="form-category" maxlength="100" title="Part category">
+		<input value="<?php print htmlentities($catdescr) ?>" name="catdescr" type="text" class="input-formelement" form="form-category" maxlength="50" title="Part category">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-category" for="datadir">Datasheet Directory</label>

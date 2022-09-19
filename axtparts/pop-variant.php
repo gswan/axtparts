@@ -219,15 +219,15 @@ $url = $formfile.$urlargs;
     <form class="form-container form-pop-locn" name="form-variant" id="form-variant" action="<?php print $url ?>" method="post" onsubmit='return deleteCheck()'>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-variant" for="variantname">Variant Name</label>
-		<input value="<?php print htmlentities($variantname) ?>" name="variantname" type="text" class="input-formelement" form="form-variant" maxlength="40" title="Variant Name">
+		<input value="<?php print htmlentities($variantname) ?>" name="variantname" type="text" class="input-formelement" form="form-variant" maxlength="25" title="Variant Name">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-variant" for="variantdescr">Variant Description</label>
-		<input value="<?php print htmlentities($variantdescr) ?>" name="variantdescr" type="text" class="input-formelement" form="form-variant" maxlength="100" title="Variant description">
+		<input value="<?php print htmlentities($variantdescr) ?>" name="variantdescr" type="text" class="input-formelement" form="form-variant" maxlength="250" title="Variant description">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-variant" for="variantstate">Variant Status</label>
-		<input value="<?php print htmlentities($variantstate) ?>" name="variantstate" type="text" class="input-formelement" form="form-variant" maxlength="40" title="Variant status">
+		<input value="<?php print htmlentities($variantstate) ?>" name="variantstate" type="text" class="input-formelement" form="form-variant" maxlength="25" title="Variant status">
 	  </div>
       <div class="container container-pop-btn">
 	    <button type="submit" class="btn-pop-update" form="form-variant" formaction="<?php print $url ?>" value="Save" name="btn_save" onclick="delClear()">Save</button>

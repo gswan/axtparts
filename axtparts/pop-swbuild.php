@@ -247,11 +247,11 @@ $url = $formfile.$urlargs;
     <form class="form-container form-pop-swbuild" name="form-swbuild" id="form-swbuild" action="<?php print $url ?>" method="post" onsubmit='return deleteCheck()'>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-swbuild" for="swname">Software Name</label>
-		<input value="<?php print htmlentities($swname) ?>" name="swname" type="text" class="input-formelement" form="form-swbuild" maxlength="40" title="Software name">
+		<input value="<?php print htmlentities($swname) ?>" name="swname" type="text" class="input-formelement" form="form-swbuild" maxlength="100" title="Software name">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-swbuild" for="buildhost">Build Host</label>
-		<input value="<?php print htmlentities($buildhost) ?>" name="buildhost" type="text" class="input-formelement" form="form-swbuild" maxlength="100" title="Software build host">
+		<input value="<?php print htmlentities($buildhost) ?>" name="buildhost" type="text" class="input-formelement" form="form-swbuild" maxlength="25" title="Software build host">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-swbuild" for="buildimage">Build Image Name</label>
@@ -259,7 +259,7 @@ $url = $formfile.$urlargs;
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-swbuild" for="releaserev">SW Release Rev</label>
-		<input value="<?php print htmlentities($releaserev) ?>" name="releaserev" type="text" class="input-formelement" form="form-swbuild" maxlength="40" title="Software release revision">
+		<input value="<?php print htmlentities($releaserev) ?>" name="releaserev" type="text" class="input-formelement" form="form-swbuild" maxlength="20" title="Software release revision">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-swbuild" for="releasedate">SW Release Date (YYYY-MM-DD)</label>

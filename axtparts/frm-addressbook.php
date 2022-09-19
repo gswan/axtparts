@@ -320,7 +320,7 @@ $url = $formfile."?show=".$showpage;
     <form class="form-container form-newaddress" name="form-newaddress" id="form-newaddress" action="<?php print $url ?>" method="post">
       <div class="container container-form-element">
 	    <label class="label label-formitem" form="form-newaddress" for="newaddrname">Organisation Name</label>
-		<input value="" name="newaddrname" type="text" class="input-formelement" form="form-newaddress" maxlength="90" title="Enter Organisation Name">
+		<input value="" name="newaddrname" type="text" class="input-formelement" form="form-newaddress" maxlength="50" title="Enter Organisation Name">
 	  </div>
       <div class="container container-form-element">
 	    <button type="submit" class="btn-form-add" form="form-newaddress" formaction="<?php print $url ?>" value="Add" name="btn_newcv" id="btn_newcv">Add</button>
@@ -347,7 +347,7 @@ $url = $formfile."?show=".$showpage;
 	  </div>
       <div class="container container-form-element">
 	    <label class="label label-formitem" form="form-newcontact" for="newcontactname">Contact Name</label>
-		<input value="" name="newcontactname" type="text" class="input-formelement" form="form-newcontact" maxlength="90" title="Enter Contact Name">
+		<input value="" name="newcontactname" type="text" class="input-formelement" form="form-newcontact" maxlength="100" title="Enter Contact Name">
 	  </div>
       <div class="container container-form-element">
 	    <button type="submit" class="btn-form-add" form="form-newcontact" formaction="<?php print $url ?>" value="Add" name="btn_newcontact">Add</button>

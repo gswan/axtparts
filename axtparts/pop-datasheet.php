@@ -273,7 +273,7 @@ $url = $formfile.$urlargs;
     <form class="form-container form-pop-datasheet" name="form-datasheet" id="form-datasheet" action="<?php print $url ?>" method="post" enctype="multipart/form-data" onsubmit="return deleteCheck()">
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-datasheet" for="datadescr">Datasheet Description</label>
-		<input value="<?php print htmlentities($datadescr) ?>" name="datadescr" type="text" class="input-formelement" form="form-datasheet" maxlength="100" title="New datasheet description">
+		<input value="<?php print htmlentities($datadescr) ?>" name="datadescr" type="text" class="input-formelement" form="form-datasheet" maxlength="250" title="New datasheet description">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-datasheet" for="sel-partcatid">Part Category</label>

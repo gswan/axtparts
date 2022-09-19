@@ -274,7 +274,7 @@ $url = $formfile.$urlargs;
     <form class="form-container form-pop-user" name="form-user" id="form-user" action="<?php print $url ?>" method="post" onsubmit='return deleteCheck()'>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-user" for="loginid">Login ID</label>
-		<input value="<?php print htmlentities($loginid) ?>" name="loginid" type="text" class="input-formelement" form="form-user" maxlength="100" title="User Login ID">
+		<input value="<?php print htmlentities($loginid) ?>" name="loginid" type="text" class="input-formelement" form="form-user" maxlength="16" title="User Login ID">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-user" for="passwd">Password</label>
@@ -282,7 +282,7 @@ $url = $formfile.$urlargs;
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-user" for="username">User Name</label>
-		<input value="<?php print htmlentities($username) ?>" name="username" type="text" class="input-formelement" form="form-user" maxlength="100" title="User Name">
+		<input value="<?php print htmlentities($username) ?>" name="username" type="text" class="input-formelement" form="form-user" maxlength="128" title="User Name">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-user" for="sel-roleid">Role</label>
@@ -302,7 +302,7 @@ $url = $formfile.$urlargs;
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-user" for="logincount">Login Count</label>
-		<input value="<?php print htmlentities($logincount) ?>" name="logincount" type="text" class="input-formelement" form="form-user" maxlength="40" title="Login count" readonly>
+		<input value="<?php print htmlentities($logincount) ?>" name="logincount" type="text" class="input-formelement" form="form-user" maxlength="10" title="Login count" readonly>
 	  </div>
       <div class="container container-pop-btn">
 	    <button type="submit" class="btn-pop-update" form="form-user" formaction="<?php print $url ?>" value="Save" name="btn_save" id="btn_save" onclick="delClear()">Save</button>

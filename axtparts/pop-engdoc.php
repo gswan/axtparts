@@ -282,7 +282,7 @@ if ($docid === false)
     <form class="form-container form-pop-engdoc" name="form-engdoc" id="form-engdoc" action="<?php print $url ?>" method="post" enctype="multipart/form-data">
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-engdoc" for="docdesc">Document Description</label>
-		<input value="" name="docdescr" type="text" class="input-formelement" form="form-engdoc" maxlength="100" title="New document description">
+		<input value="" name="docdescr" type="text" class="input-formelement" form="form-engdoc" maxlength="250" title="New document description">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-engdoc" for="sel-assyid">Assembly</label>
@@ -311,7 +311,7 @@ else
     <form class="form-container form-pop-engdoc" name="form-engdoc" id="form-engdoc" action="<?php print $url ?>" method="post" onsubmit='return deleteCheck()'>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-engdoc" for="docdescr">Document Description</label>
-		<input value="<?php print htmlentities($docdescr) ?>" name="docdescr" type="text" class="input-formelement" form="form-engdoc" maxlength="100" title="Document description">
+		<input value="<?php print htmlentities($docdescr) ?>" name="docdescr" type="text" class="input-formelement" form="form-engdoc" maxlength="250" title="Document description">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-engdoc" for="sel-assyid">Assembly</label>
@@ -321,7 +321,7 @@ else
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-engdoc" for="docpath">Path</label>
-		<input value="<?php print htmlentities($docpath) ?>" name="docpath" type="text" class="input-formelement" form="form-engdoc" maxlength="200" title="Document file path" readonly>
+		<input value="<?php print htmlentities($docpath) ?>" name="docpath" type="text" class="input-formelement" form="form-engdoc" maxlength="120" title="Document file path" readonly>
 	  </div>
       <div class="container container-pop-btn">
 	    <button type="submit" class="btn-pop-update" form="form-engdoc" formaction="<?php print $url ?>" value="Save" name="btn_save" id="btn_save" formenctype="multipart/form-data" onclick="delClear()">Save</button>

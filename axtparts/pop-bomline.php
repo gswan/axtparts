@@ -490,15 +490,15 @@ $url = $formfile.$urlargs;
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-bomline" for="qty">Qty</label>
-		<input value="<?php print htmlentities($qty) ?>" name="qty" type="text" class="input-formelement" form="form-bomline" maxlength="20" title="Quantity">
+		<input value="<?php print htmlentities($qty) ?>" name="qty" type="text" class="input-formelement" form="form-bomline" maxlength="10" title="Quantity">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-bomline" for="um">Unit of Measure</label>
-		<input value="<?php print htmlentities($um) ?>" name="um" type="text" class="input-formelement" form="form-bomline" maxlength="20" title="Unit of measure">
+		<input value="<?php print htmlentities($um) ?>" name="um" type="text" class="input-formelement" form="form-bomline" maxlength="10" title="Unit of measure">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-bomline" for="ref">Circuit Ref</label>
-		<input value="<?php print htmlentities($ref) ?>" name="ref" type="text" class="input-formelement" form="form-bomline" maxlength="100" title="Circuit references">
+		<input value="<?php print htmlentities($ref) ?>" name="ref" type="text" class="input-formelement" form="form-bomline" maxlength="250" title="Circuit references">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-bomline" for="sel-altpartid">Alternate Part</label>

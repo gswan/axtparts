@@ -189,7 +189,7 @@ $url = $formfile.$urlargs;
     <form class="form-container form-pop-compstatus" name="form-compstatus" id="form-compstatus" action="<?php print $url ?>" method="post" onsubmit='return deleteCheck()'>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-compstatus" for="statedesc">Component Status</label>
-		<input value="<?php print htmlentities($statedescr) ?>" name="statedesc" type="text" class="input-formelement" form="form-compstatus" maxlength="100" title="Component status">
+		<input value="<?php print htmlentities($statedescr) ?>" name="statedesc" type="text" class="input-formelement" form="form-compstatus" maxlength="50" title="Component status">
 	  </div>
       <div class="container container-pop-btn">
 	    <button type="submit" class="btn-pop-update" form="form-compstatus" formaction="<?php print $url ?>" value="Save" name="btn_save" id="btn_save" onclick="delClear()">Save</button>

@@ -217,7 +217,7 @@ $url = $formfile.$urlargs;
     <form class="form-container form-pop-role" name="form-role" id="form-role" action="<?php print $url ?>" method="post" onsubmit='return deleteCheck()'>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-role" for="rolename">Role Name</label>
-		<input value="<?php print htmlentities($rolename) ?>" name="rolename" type="text" class="input-formelement" form="form-role" maxlength="100" title="Role Name">
+		<input value="<?php print htmlentities($rolename) ?>" name="rolename" type="text" class="input-formelement" form="form-role" maxlength="64" title="Role Name">
 	  </div>
       <div class="container container-pop-el">
         <div class="container container-pop-role-chk">

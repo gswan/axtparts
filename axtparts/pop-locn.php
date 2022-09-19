@@ -201,11 +201,11 @@ $url = $formfile.$urlargs;
     <form class="form-container form-pop-locn" name="form-locn" id="form-locn" action="<?php print $url ?>" method="post" onsubmit='return deleteCheck()'>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-locn" for="locref">Location Ref</label>
-		<input value="<?php print htmlentities($locref) ?>" name="locref" type="text" class="input-formelement" form="form-locn" maxlength="40" title="Stock Location Reference">
+		<input value="<?php print htmlentities($locref) ?>" name="locref" type="text" class="input-formelement" form="form-locn" maxlength="50" title="Stock Location Reference">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-locn" for="locdescr">Location Description</label>
-		<input value="<?php print htmlentities($locdescr) ?>" name="locdescr" type="text" class="input-formelement" form="form-locn" maxlength="100" title="Location description">
+		<input value="<?php print htmlentities($locdescr) ?>" name="locdescr" type="text" class="input-formelement" form="form-locn" maxlength="250" title="Location description">
 	  </div>
       <div class="container container-pop-btn">
 	    <button type="submit" class="btn-pop-update" form="form-locn" formaction="<?php print $url ?>" value="Save" name="btn_save" onclick="delClear()">Save</button>

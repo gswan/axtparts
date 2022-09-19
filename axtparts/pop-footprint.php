@@ -190,7 +190,7 @@ $url = $formfile.$urlargs;
     <form class="form-container form-pop-footprint" name="form-fprint" id="form-fprint" action="<?php print $url ?>" method="post" onsubmit='return deleteCheck()'>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-fprint" for="footprint">Part Footprint</label>
-		<input value="<?php print htmlentities($fprintdescr) ?>" name="footprint" type="text" class="input-formelement" form="form-fprint" maxlength="100" title="Part footprint">
+		<input value="<?php print htmlentities($fprintdescr) ?>" name="footprint" type="text" class="input-formelement" form="form-fprint" maxlength="50" title="Part footprint">
 	  </div>
       <div class="container container-pop-btn">
 	    <button type="submit" class="btn-pop-update" form="form-fprint" formaction="<?php print $url ?>" value="Save" name="btn_save" onclick="delClear()">Save</button>

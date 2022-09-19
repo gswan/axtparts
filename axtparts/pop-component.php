@@ -500,11 +500,11 @@ $url = $formfile.$urlargs;
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-component" for="mfgname">Manufacturer</label>
-		<input value="<?php print htmlentities($mfgname) ?>" name="mfgname" type="text" class="input-formelement" form="form-component" maxlength="100" title="Component manufacturer">
+		<input value="<?php print htmlentities($mfgname) ?>" name="mfgname" type="text" class="input-formelement" form="form-component" maxlength="50" title="Component manufacturer">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-component" for="mfgcode">Device Number</label>
-		<input value="<?php print htmlentities($mfgcode) ?>" name="mfgcode" type="text" class="input-formelement" form="form-component" maxlength="100" title="Component device number">
+		<input value="<?php print htmlentities($mfgcode) ?>" name="mfgcode" type="text" class="input-formelement" form="form-component" maxlength="25" title="Component device number">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-component" for="sel-compdsheet">Existing Datasheet</label>
@@ -519,7 +519,7 @@ $url = $formfile.$urlargs;
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-component" for="datadescr">New Datasheet Description</label>
-		<input value="" name="datadescr" type="text" class="input-formelement" form="form-component" maxlength="100" title="New datasheet description">
+		<input value="" name="datadescr" type="text" class="input-formelement" form="form-component" maxlength="250" title="New datasheet description">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-component" for="sel-compstatus">Component Status</label>
