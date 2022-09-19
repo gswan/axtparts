@@ -1,0 +1,374 @@
+
+/************************************************
+ General Default Styles
+************************************************/
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+p,
+blockquote,
+th,
+td,
+button,
+input,
+select,
+textarea {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+/************************************************
+ Grid Default Styles
+************************************************/
+body {
+  min-height: 100vh;
+  position: relative;
+}
+.form-container,
+.link-container,
+[class*=container] {
+  min-width: 10px;
+}
+.link-container,
+label.label-container {
+  display: block;
+}
+.responsive-picture {
+  width: 100%;
+  overflow: hidden;
+  display: block;
+}
+.responsive-picture picture {
+  line-height: 0;
+  display: block;
+}
+.responsive-picture img {
+  width: 100%;
+  height: 100%;
+}
+/************************************************
+PLaceholder Small Hero Default Styles
+************************************************/
+.placeholder {
+  background-color: lightgrey;
+  text-align: center;
+  padding: 10px 0;
+}
+h3.smallhero-header {
+  font-size: 1.25em;
+  color: #464646;
+}
+h3.smallhero-tagline {
+  color: #646464;
+  font-style: normal;
+  padding: 0;
+}
+/************************************************
+PLaceholder Hero Unit Default Styles
+************************************************/
+.placeholder-hero {
+  background-color: lightgrey;
+  text-align: left;
+  padding: 10px 0 10px 20px;
+}
+h1.hero-header {
+  color: #464646;
+}
+p.hero-tagline {
+  color: #646464;
+  font-style: normal;
+  padding: 0;
+}
+/************************************************
+ Default q and code tags Styles
+************************************************/
+code {
+  font-family: Consolas, monaco, monospace;
+}
+/************************************************
+Social Element Default Styles
+************************************************/
+.social-element {
+  display: inline-block;
+  text-align: center;
+}
+.social-element a.social-label {
+  text-align: center;
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  display: block;
+}
+.social-image {
+  background-color: #525252;
+  border-radius: 3px 3px;
+  max-width: 32px;
+  display: inline-block;
+}
+.social-image img {
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/************************************************
+Font Icon element Styles
+************************************************/
+span.glyph,
+a.glyph {
+  display: block;
+  text-decoration: none;
+}
+span.glyph i,
+a.glyph i {
+  line-height: 1;
+}
+/************************************************
+Button element Styles
+************************************************/
+.image-for-button {
+  height: auto;
+  overflow: hidden;
+  width: 100%;
+  max-width: 24px;
+  display: inline-block;
+  vertical-align: inherit;
+}
+.image-for-button picture {
+  max-width: none;
+  height: auto;
+  display: block;
+  line-height: 0;
+}
+.image-for-button img {
+  width: 100%;
+  height: 100%;
+}
+button.button-glyph,
+button.button-image {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+span.glyph-for-button,
+a.glyph-for-button {
+  font-size: 22px;
+  text-decoration: none;
+}
+span.glyph-for-button i,
+a.glyph-for-button i {
+  line-height: 1;
+}
+a[class*='link-button'] .image-for-button {
+  vertical-align: middle;
+}
+button[data-coffeebuilder-button][data-disabled],
+button[disabled] {
+  opacity: 0.25;
+  cursor: auto;
+}
+/************************************************
+ Video Element Styles
+************************************************/
+.responsive-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+.responsive-video.square {
+  padding-bottom: 120%;
+  max-width: initial;
+}
+.responsive-video iframe,
+.responsive-video object,
+.responsive-video embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/************************************************
+ HTML5 Video Element Styles
+************************************************/
+video {
+  width: 50%;
+  background-color: black;
+}
+/************************************************
+ HTML5 Audio Element Styles
+************************************************/
+audio {
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: transparent;
+  padding: 0px 20px 30px 20px;
+  height: 95px;
+  width: 50%;
+  margin: 10px;
+}
+/************************************************
+ Map Element Styles
+************************************************/
+.responsive-map {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+  height: 350px;
+  min-height: 50px;
+  background-color: #dcdcdc;
+}
+.responsive-map iframe,
+.responsive-map object,
+.responsive-map embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/************************************************
+ Rule
+************************************************/
+.rule {
+  padding: 5px 0;
+  width: 100%;
+  margin: 7px 0;
+}
+.rule hr {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-top: 1px solid #dddddd;
+  width: 100%;
+}
+/************************************************
+ Payment Styles
+************************************************/
+form.paypal-image,
+form.paypal-button {
+  display: inline-block;
+  padding: 0;
+  overflow: hidden;
+}
+form.paypal-button {
+  background-color: #c0c0c0;
+}
+form.paypal-button button {
+  padding: 0.5em 1em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  line-height: 1;
+  color: inherit;
+  cursor: inherit;
+  display: block;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+form.paypal-image input[type=image] {
+  width: 100%;
+  margin: 0;
+}
+/************************************************
+ Textarea
+************************************************/
+textarea {
+  resize: none;
+}
+/************************************************
+ Text Elements inside a label container
+************************************************/
+.label-container span.text-element {
+  display: inline-block;
+  font-size: 1em;
+}
+/************************************************
+ Video Background Full Screen Styles
+************************************************/
+.bg-full-screen-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -100;
+  overflow: hidden;
+}
+video.full-screen-video {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+/************************************************
+ Video Background Content Size Styles
+************************************************/
+.bg-content-size-container {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  min-height: 100px;
+  width: 100%;
+}
+video.content-size-video {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+/************************************************
+ Checkboxes and Radio Buttons
+************************************************/
+label.checkbox > [type='checkbox'],
+label.radio > [type='radio'] {
+  margin-right: 0.5rem;
+}
+
+/* Layout Elements */
+.container.sd-two-cols,
+.container.sd-three-cols,
+.container.sd-four-cols {
+  display: grid;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  grid-column-gap: 1.5rem;
+}
+.container.sd-two-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+.container.sd-three-cols {
+  grid-template-columns: repeat(3, 1fr);
+}
+.container.sd-four-cols {
+  grid-template-columns: repeat(4, 1fr);
+}
