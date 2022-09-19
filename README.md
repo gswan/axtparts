@@ -4,7 +4,7 @@ AXTParts Electronic engineering parts management system
 ## History
 AXTParts was initially conceived and written by Geoff Swan in around 2002-2003 to manage an ever-growing electronic parts inventory in an electronics lab. It consists of a database and web application, intended for use on a Linux (LAMP) server, to allow devices to connect and use it.
 
-It was originally used on a desktop browser and the interface was designed to accommodate this. Eventually this was released on the axtsystems.com website in 2017 as version 3 for other electronic hobbyists and development labs to use. 
+It was originally used on a desktop browser and the interface was designed to accommodate this. Eventually this was released on the axtsystems.com website in 2017 as version 3 for electronic development labs and hobbyists to use. 
 
 After gaining some popularity and in order to handle more diverse viewing devices (phones and tablets) it was updated to version 4, featuring a responsive interface design. Version 4 was also moved from an internal subversion repository to github, to allow people to contribute, report issues or fork the project into their own versions.
 
@@ -24,18 +24,20 @@ These instructions are for both fresh installations and upgrades to current inst
 
 The software was developed for use on a LAMP (Linux-Apache-MySQL-PHP) server. It uses very little in resources so can easily be housed in a small PC on the network.
 
-These versions are currently used/tested but it is also likely to work with other versions as well. Care has been taken to not depend on many external packages or features.
+These versions are currently used/tested but it is also likely to work with other versions as well. 
+Care has been taken not to unnecessarily depend on external packages or features.
 
 * PHP: Versions 5.5, 7 and 8 are currently in use with the application.
 * MySQL: MySQL or MariaDB current versions (MySQL-15) are in use.
 * Apache: 2.4
 
 
-### Installation
+## Installation
 
-#### Fresh Install for new systems
+### Fresh Install for new systems
 
-This assumes you have a Linux server with Apache, MySQL and PHP operational. This may be Fedora, Arch-Linux, Ubuntu or whatever.
+This assumes you have a Linux server with Apache, MySQL and PHP operational. This may be Fedora, Arch-Linux, Gentoo, Ubuntu or whatever you prefer.
+So long as you understand how to manually install and configure databases and web applications.
 
 Installation requires several simple steps.
 
@@ -46,15 +48,15 @@ This method is used to allow updated versions to be retrieved into separate dire
 
 **Using git to clone the repository**
 ```
-$ cd /opt
-$ git clone https://github.com/gswan/axtparts.git axtparts4
-$ cd axtparts4
+# cd /opt
+# git clone https://github.com/gswan/axtparts.git axtparts4
+# cd axtparts4
 ```
 **Using a source tarball**
 ```
-$ cd /opt
-$ tar -xf axtparts-4.0.tar.gz 
-$ cd axtparts4
+# cd /opt
+# $ tar -xf axtparts-4.0.tar.gz 
+# cd axtparts4
 ```
 
 
@@ -62,23 +64,23 @@ $ cd axtparts4
 
 * Create the database using the database schema file
 ```
-$ cd /opt/axtparts4/sql
-$ mysql -uroot -p < axtparts-schema.sql
+# cd /opt/axtparts4/sql
+# mysql -uroot -p < axtparts-schema.sql
 ```
 * Import the initial data. 
 
 The initial data file can be edited to set your own part categories and footprints to start with. 
 It includes an admin user with default initial password 'mypassword!'. This can be changed once logged in, and additional users created.
 ```
-$ cd /opt/axtparts4/sql
-$ mysql -uroot -p < axtparts-initialdata.sql
+# cd /opt/axtparts4/sql
+# mysql -uroot -p < axtparts-initialdata.sql
 ```
 * Create a user with privileges to work with the axtparts database.
 
 The user information must be entered into the axtparts configuration file in a later step so make a note of the password used here.
 In this case the connection is via 127.0.0.1 on a TCP socket. If you prefer to use Unix sockets for connection then use 'localhost' instead as the hostname.
 ```
-$ mysql -uroot -p mysql
+# mysql -uroot -p mysql
 mysql> grant insert,update,select,delete on axtparts.* to 'axtpartsuser'@'127.0.0.1' identified by 'PASSWORD';
 mysql> flush privileges;
 mysql> exit;
@@ -96,37 +98,39 @@ define ("PARTSHOST", "127.0.0.1");
 define ("PARTSDBASE", "axtparts");
 ```
 
-Link the web application into the web docroot for your apache server. In this example we are using /var/www/https as the docroot for the http-ssl server.
+Link the web application into the web docroot for your apache server. 
+In this example we are using /var/www/https as the docroot for the http-ssl server.
 ```
-$ cd /opt/axtparts4
-$ mkdir -pv datasheets
-$ sudo mkdir -pv /var/axtparts/{swimages,engdocs,mfgdocs}
-$ sudo chown -R apache.apache /opt/axtparts4/axtparts/datasheets
-$ sudo chown -R apache.apache /var/axtparts
-$ ln -s /opt/axtparts4/axtparts /var/www/axtparts
+# cd /opt/axtparts4
+# mkdir -pv datasheets
+# mkdir -pv /var/axtparts/{swimages,engdocs,mfgdocs}
+# chown -R apache.apache /opt/axtparts4/axtparts/datasheets
+# chown -R apache.apache /var/axtparts
+# ln -s /opt/axtparts4/axtparts /var/www/axtparts
 ```
 Now you should be able to use your web browser to connect to the site and log in using the default admin user and password.
 
-
-#### Upgrading from Version 3
+---
+### Upgrading from Version 3
 The database has not changed and version 3 is a simple upgrade to version 4.
 
 The only adjustment that must be made is the location of the datasheets directory. It is now within the web application directory.
 **Using git to clone the repository**
 ```
-$ cd /opt
-$ git clone https://github.com/gswan/axtparts.git axtparts4
-$ cd axtparts4
+# cd /opt
+# git clone https://github.com/gswan/axtparts.git axtparts4
+# cd axtparts4
 ```
 **Using a source tarball**
 ```
-$ cd /opt
-$ tar -xf axtparts-4.0.tar.gz 
-$ cd axtparts4
+# cd /opt
+# tar -xf axtparts-4.0.tar.gz 
+# cd axtparts4
 ```
-Copy the existing datasheets directory to the new application. It is assumed here that the existing application is in /var/www/https/axtparts/.
+Copy the existing datasheets directory to the new application. 
+It is assumed here that the existing application is in /var/www/https/axtparts/.
 ```
-$ cp -a /var/www/https/axtparts/datasheets /opt/axtparts4/axtparts/datasheets
+# cp -a /var/www/https/axtparts/datasheets /opt/axtparts4/axtparts/datasheets
 ```
 
 Edit the config file in /opt/axtparts4/axtparts/config/config-axtparts.php to set the correct database connection parameters. 
@@ -141,20 +145,19 @@ define ("PARTSDBASE", "axtparts");
 Link the web application into the web docroot for your apache server. In this example we are using /var/www/https as the docroot for the http-ssl server.
 Since the existing application is located in axtparts/ we will move this to axtparts3/ and link the new installation to axtparts/
 ```
-$ cd /opt/axtparts4
-$ sudo mv /var/www/https/axtparts /var/www/https/axtparts3
-$ ln -s /opt/axtparts4/axtparts /var/www/axtparts
+# cd /opt/axtparts4
+# mv /var/www/https/axtparts /var/www/https/axtparts3
+# ln -s /opt/axtparts4/axtparts /var/www/axtparts
 ```
 Now you should be able to use your web browser to connect to the site and log in using existing user credentials.
 
-
+---
 ## Authors
 
-* **Geoff Swan** - *Initial work* - [AXT Systems](https://github.com/gswan)
+* **Geoff Swan** - *Initial releases* - [AXT Systems](https://axtsystems.com)
 
-See also the list of [contributors](https://github.com/gswan/axtparts/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the GPL 3.0 License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GPL 3.0 License - see the [LICENSE](LICENSE) file for details
 
