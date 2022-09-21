@@ -27,7 +27,7 @@ The software was developed for use on a LAMP (Linux-Apache-MySQL-PHP) server. It
 These versions are currently used/tested but it is also likely to work with other versions as well. 
 Care has been taken not to unnecessarily depend on external packages or features.
 
-* PHP: Versions 5.5, 7 and 8 are currently in use with the application.
+* PHP: Versions 5.5, 7 and 8 with MySQLi are currently in use with the application.
 * MySQL: MySQL or MariaDB current versions (MySQL-15) are in use.
 * Apache: 2.4
 
@@ -36,7 +36,7 @@ Care has been taken not to unnecessarily depend on external packages or features
 
 ### Fresh Install for new systems
 
-This assumes you have a Linux server with Apache, MySQL and PHP operational. This may be Fedora, Arch-Linux, Gentoo, Ubuntu or whatever you prefer.
+This assumes you have a Linux server with Apache, MySQL and PHP operational. This may be Fedora, Arch-Linux, Gentoo, Debian, Ubuntu or whatever you prefer.
 So long as you understand how to manually install and configure databases and web applications.
 
 Installation requires several simple steps.
@@ -112,9 +112,13 @@ Now you should be able to use your web browser to connect to the site and log in
 
 ---
 ### Upgrading from Version 3
-The database has not changed and version 3 is a simple upgrade to version 4.
+The database requires one table alteration to handle sub-assembly BOM variants.
+This requires the following to be executed on your database to add a column to the boms table.
+```
+mysql> use axtparts;
+mysql> alter table boms add column blvarid int unsigned default 0;
+```
 
-The only adjustment that must be made is the location of the datasheets directory. It is now within the web application directory.
 **Using git to clone the repository**
 ```
 # cd /opt
@@ -124,11 +128,11 @@ The only adjustment that must be made is the location of the datasheets director
 **Using a source tarball**
 ```
 # cd /opt
-# tar -xf axtparts-4.0.tar.gz 
+# tar -xf axtparts-4.0.1.tar.gz 
 # cd axtparts4
 ```
 Copy the existing datasheets directory to the new application. 
-It is assumed here that the existing application is in /var/www/https/axtparts/.
+It is assumed here that the existing application is in /var/www/https/axtparts/
 ```
 # cp -a /var/www/https/axtparts/datasheets /opt/axtparts4/axtparts/datasheets
 ```
