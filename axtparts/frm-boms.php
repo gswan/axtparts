@@ -120,7 +120,7 @@ if ($s_p)
 }
 
 // Get total number of assemblies with boms for page calculations
-$q = "select distinct(boms.assyid), variantid from boms "
+$q = "select distinct(boms.assyid), bomvariants.variantid from boms "
 	. "\n left join assemblies on assemblies.assyid=boms.assyid "
 	. "\n left join bomvariants on bomvariants.bomid=boms.bomid"
 	;

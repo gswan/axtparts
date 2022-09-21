@@ -519,7 +519,7 @@ $url = $formfile.$urlargs;
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-component" for="datadescr">New Datasheet Description</label>
-		<input value="" name="datadescr" type="text" class="input-formelement" form="form-component" maxlength="250" title="New datasheet description">
+		<input value="" name="datadescr" type="text" class="input-formelement" form="form-component" maxlength="100" title="New datasheet description">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-component" for="sel-compstatus">Component Status</label>

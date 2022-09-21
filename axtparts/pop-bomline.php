@@ -68,9 +68,9 @@ if (isset($_POST["btn_save"]))
 {
 	if ($myparts->SessionMePrivilegeBit(UPRIV_BOMITEMS) === true)
 	{
-		if (isset($_POST["partid"]))
+		if (isset($_POST["sel-partid"]))
 		{
-			$partid = trim($_POST["partid"]);
+			$partid = trim($_POST["sel-partid"]);
 			if ($partid == "")
 				$partid = false;
 		}
@@ -81,6 +81,22 @@ if (isset($_POST["btn_save"]))
 			$myparts->AlertMeTo("A part must be specified.");
 		else 
 		{
+			// Is partid a composte part and variant ID for an assembly?
+			if (strpos($partid, ':') !== false)
+			{
+				// separate them out
+				$pp = explode(':', $partid);
+				if (count($pp) > 1)
+				{
+					$partid = $pp[0];
+					$varid = $pp[1];
+				}
+				else
+					$partid = $pp[0];
+			}
+			else
+				$varid = false;
+			
 			if (isset($_POST["qty"]))
 				$qty = trim($_POST["qty"]);
 			else 
@@ -93,8 +109,8 @@ if (isset($_POST["btn_save"]))
 				$ref = trim($_POST["ref"]);
 			else 	
 				$ref = "";
-			if (isset($_POST["altpartid"]))
-				$altpartid = trim($_POST["altpartid"]);
+			if (isset($_POST["sel-altpartid"]))
+				$altpartid = trim($_POST["sel-altpartid"]);
 			else 	
 				$altpartid = 0;
 			
@@ -108,8 +124,11 @@ if (isset($_POST["btn_save"]))
 					. "\n qty='".$dbh->real_escape_string($qty)."', "
 					. "\n um='".$dbh->real_escape_string($um)."', "
 					. "\n ref='".$dbh->real_escape_string($ref)."', "
-					. "\n alt='".$dbh->real_escape_string($altpartid)."' "
 					;
+				if ($varid !== false)
+					$q_p .= "blvarid='".$dbh->real_escape_string($varid)."', ";
+				$q_p .= "\n alt='".$dbh->real_escape_string($altpartid)."' ";
+				
 				$s_p = $dbh->query($q_p);
 				if (!$s_p)
 					$myparts->AlertMeTo("Error: ".(htmlentities($dbh->error, ENT_COMPAT)));
@@ -163,9 +182,13 @@ if (isset($_POST["btn_save"]))
 					. "\n qty='".$dbh->real_escape_string($qty)."', "
 					. "\n um='".$dbh->real_escape_string($um)."', "
 					. "\n ref='".$dbh->real_escape_string($ref)."', "
-					. "\n alt='".$dbh->real_escape_string($altpartid)."' "
+					;
+				if ($varid !== false)
+					$q_p .= "blvarid='".$dbh->real_escape_string($varid)."', ";
+				$q_p .= "\n alt='".$dbh->real_escape_string($altpartid)."' "
 					. "\n where bomid='".$dbh->real_escape_string($bomid)."' "
 					;
+					
 				$s_p = $dbh->query($q_p);
 				if (!$s_p)
 					$myparts->AlertMeTo("Error: ".(htmlentities($dbh->error, ENT_COMPAT)));
@@ -341,12 +364,30 @@ if ($s_parts)
 {
 	while ($r_parts = $s_parts->fetch_assoc())
 	{
-		$list_parts[$i][0] = $r_parts["partid"];
-		if ($r_parts["fprintdescr"] != "")
-			$list_parts[$i][1] = $r_parts["catdescr"]." ".$r_parts["partdescr"].", ".$r_parts["fprintdescr"].", (".$r_parts["partnumber"].")";
+		$pvars = $myparts->getVariantsForAssemblyPart($dbh, $r_parts["partid"]);
+		if ($pvars === false)
+		{
+			$list_parts[$i][0] = $r_parts["partid"];
+			if ($r_parts["fprintdescr"] != "")
+				$list_parts[$i][1] = $r_parts["catdescr"]." ".$r_parts["partdescr"].", ".$r_parts["fprintdescr"].", (".$r_parts["partnumber"].")";
+			else
+				$list_parts[$i][1] = $r_parts["catdescr"]." ".$r_parts["partdescr"]." (".$r_parts["partnumber"].")";
+			$i++;
+		}
 		else
-			$list_parts[$i][1] = $r_parts["catdescr"]." ".$r_parts["partdescr"]." (".$r_parts["partnumber"].")";
-		$i++;
+		{
+			foreach ($pvars as $pv)
+			{
+				$list_parts[$i][0] = $r_parts["partid"].":".$pv;
+				$varinfo = $myparts->getVariantDetails($dbh, $pv);
+				$varname = $varinfo["variantname"];
+				if ($r_parts["fprintdescr"] != "")
+					$list_parts[$i][1] = $r_parts["catdescr"]." ".$r_parts["partdescr"].", ".$r_parts["fprintdescr"].", (".$r_parts["partnumber"].") [".$varname."]";
+				else
+					$list_parts[$i][1] = $r_parts["catdescr"]." ".$r_parts["partdescr"]." (".$r_parts["partnumber"].") [".$varname."]";
+				$i++;
+			}
+		}		
 	}
 	$s_parts->free();
 }
@@ -387,7 +428,10 @@ if ($bomid !== false)
 	else
 	{
 		$r_bl = $s_bl->fetch_assoc();
-		$partid = $r_bl["partid"];
+		if ($r_bl["blvarid"] == 0)
+			$partid = $r_bl["partid"];
+		else
+			$partid = $r_bl["partid"].":".$r_bl["blvarid"];
 		$qty = $r_bl["qty"];
 		$um = $r_bl["um"];
 		$ref = $r_bl["ref"];
@@ -480,7 +524,7 @@ $url = $formfile.$urlargs;
 
 <body>
   <div class="container container-body">
-    <span class="text-element text-poptitle"><?php print ($assyid === false ? "Add New BOM Item" : "Edit BOM Item") ?></span>
+    <span class="text-element text-poptitle"><?php print ($bomid === false ? "Add New BOM Item" : "Edit BOM Item") ?></span>
     <form class="form-container form-pop-locn" name="form-bomline" id="form-bomline" action="<?php print $url ?>" method="post" onsubmit='return deleteCheck()'>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-bomline" for="sel-partid">Part</label>
@@ -490,7 +534,7 @@ $url = $formfile.$urlargs;
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-bomline" for="qty">Qty</label>
-		<input value="<?php print htmlentities($qty) ?>" name="qty" type="text" class="input-formelement" form="form-bomline" maxlength="10" title="Quantity">
+		<input value="<?php print htmlentities($qty) ?>" name="qty" type="text" class="input-formelement" form="form-bomline" maxlength="8" title="Quantity">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-bomline" for="um">Unit of Measure</label>

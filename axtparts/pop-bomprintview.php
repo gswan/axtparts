@@ -157,6 +157,12 @@ if ($assyid !== false)
 			$dset[$i]["ref"] = $r_b["ref"];
 			$dset[$i]["altid"] = $r_b["alt"];
 			$dset[$i]["bomid"] = $r_b["bomid"];
+			$dset[$i]["blvarid"] = $r_b["blvarid"];
+			if ($dset[$i]["blvarid"] > 0)
+			{
+				$vd = $myparts->getVariantDetails($dbh, $dset[$i]["blvarid"]);
+				$dset[$i]["variantname"] = $vd["variantname"];
+			}
 			
 			// If alt is > 0 then find the part detail for it.
 			$altid = $r_b["alt"];
@@ -314,7 +320,14 @@ if ($showstock === false)
         <span class="text-element text-print-dataitem"><?php print htmlentities($dset[$i]["partnumber"]) ?></span>
       </div>
       <div class="container container-print-griddata">
-        <span class="text-element text-print-dataitem"><?php print htmlentities($dset[$i]["catdescr"])." ".htmlentities($dset[$i]["partdescr"])." ".htmlentities($dset[$i]["footprint"]) ?></span>
+        <span class="text-element text-print-dataitem">
+		<?php 
+		if ($dset[$i]["blvarid"] > 0)
+			print htmlentities($dset[$i]["catdescr"])." ".htmlentities($dset[$i]["partdescr"])." ".htmlentities($dset[$i]["footprint"])." [".htmlentities($dset[$i]["variantname"])."]";
+		else
+			print htmlentities($dset[$i]["catdescr"])." ".htmlentities($dset[$i]["partdescr"])." ".htmlentities($dset[$i]["footprint"]);
+		?>
+		</span>
       </div>
       <div class="container container-print-griddata">
         <span class="text-element text-print-dataitem"><?php print htmlentities($dset[$i]["qty"]) ?></span>
@@ -368,7 +381,14 @@ else
         <span class="text-element text-print-dataitem"><?php print htmlentities($dset[$i]["partnumber"]) ?></span>
       </div>
       <div class="container container-print-griddata">
-        <span class="text-element text-print-dataitem"><?php print htmlentities($dset[$i]["catdescr"])." ".htmlentities($dset[$i]["partdescr"])." ".htmlentities($dset[$i]["footprint"]) ?></span>
+        <span class="text-element text-print-dataitem">
+		<?php 
+		if ($dset[$i]["blvarid"] > 0)
+			print htmlentities($dset[$i]["catdescr"])." ".htmlentities($dset[$i]["partdescr"])." ".htmlentities($dset[$i]["footprint"])." [".htmlentities($dset[$i]["variantname"])."]";
+		else
+			print htmlentities($dset[$i]["catdescr"])." ".htmlentities($dset[$i]["partdescr"])." ".htmlentities($dset[$i]["footprint"]);
+		?>
+		</span>
       </div>
       <div class="container container-print-griddata">
         <span class="text-element text-print-dataitem"><?php print htmlentities($dset[$i]["qty"]) ?></span>

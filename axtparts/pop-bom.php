@@ -85,7 +85,7 @@ if (isset($_POST["btn_copybom"]))
 				$q_bomsrc = "select * "
 						. "\n from bomvariants "
 						. "\n left join boms on boms.bomid=bomvariants.bomid "
-						. "\n where variantid='".$dbh->real_escape_string($bcvariantid)."' "
+						. "\n where bomvariants.variantid='".$dbh->real_escape_string($bcvariantid)."' "
 						;
 				$s_bomsrc = $dbh->query($q_bomsrc);
 				$bcstop = false;
@@ -100,6 +100,7 @@ if (isset($_POST["btn_copybom"]))
 							$dbom_ref = $r_bomsrc["ref"];
 							$dbom_um = $r_bomsrc["um"];
 							$dbom_alt = $r_bomsrc["alt"];
+							$dbom_variantid = $r_bomsrc["blvarid"];
 							
 							// Insert a new bom line first
 							$q_dbom = "insert into boms "
@@ -109,8 +110,11 @@ if (isset($_POST["btn_copybom"]))
 								. "\n qty='".$dbh->real_escape_string($dbom_qty)."', "
 								. "\n um='".$dbh->real_escape_string($dbom_um)."', "
 								. "\n ref='".$dbh->real_escape_string($dbom_ref)."', "
-								. "\n alt='".$dbh->real_escape_string($dbom_alt)."' "
 								;
+							if ($dbom_variantid > 0)
+								$q_dbom .= "\n blvarid='".$dbh->real_escape_string($dbom_variantid)."', ";
+							$q_dbom .= "\n alt='".$dbh->real_escape_string($dbom_alt)."' ";
+							
 							$s_dbom = $dbh->query($q_dbom);
 							if ($s_dbom)
 							{
@@ -270,6 +274,12 @@ if ($assyid !== false)
 			$dset[$i]["ref"] = $r_b["ref"];
 			$dset[$i]["altid"] = $r_b["alt"];
 			$dset[$i]["bomid"] = $r_b["bomid"];
+			$dset[$i]["blvarid"] = $r_b["blvarid"];
+			if ($dset[$i]["blvarid"] > 0)
+			{
+				$vd = $myparts->getVariantDetails($dbh, $dset[$i]["blvarid"]);
+				$dset[$i]["variantname"] = $vd["variantname"];
+			}
 			
 			// If alt is > 0 then find the part detail for it.
 			$altid = $r_b["alt"];
@@ -578,7 +588,7 @@ else
         <span class="text-element text-gridhead-column">Alt Part</span>
       </div>
       <div class="container container-grid-addline-el-B0">
-        <a class="link-text link-grid-dataitem" href="javascript:popupOpener('pop-bomline.php<?php print "?assyid=".urlencode($assyid)."&variantid=".urlencode($variantid) ?>','pop_bomline',600,600)" title="Add new BOM line">New BOM Line</a>
+        <a class="link-text link-grid-dataitem" href="javascript:popupOpener('pop-bomline.php<?php print "?assyid=".urlencode($assyid)."&variantid=".urlencode($variantid) ?>','pop_bomline',800,600)" title="Add new BOM line">New BOM Line</a>
       </div>
       <div class="container container-grid-addline-el-B0"></div>
       <div class="container container-grid-addline-el-B0"></div>
@@ -595,10 +605,17 @@ else
 				$stline = "odd";
 ?>
       <div class="container container-grid-dataitem-B0-<?php print $stline ?>">
-        <a class="link-text link-grid-dataitem" href="javascript:popupOpener('pop-bomline.php<?php print "?assyid=".$assyid."&variantid=".$variantid."&bomid=".$dset[$i]["bomid"] ?>','pop_bomline',600,600)" title="View/Edit BOM line"><?php print htmlentities($dset[$i]["partnumber"]) ?></a>
+        <a class="link-text link-grid-dataitem" href="javascript:popupOpener('pop-bomline.php<?php print "?assyid=".$assyid."&variantid=".$variantid."&bomid=".$dset[$i]["bomid"] ?>','pop_bomline',800,600)" title="View/Edit BOM line"><?php print htmlentities($dset[$i]["partnumber"]) ?></a>
       </div>
       <div class="container container-grid-dataitem-B0-<?php print $stline ?>">
-        <span class="text-element text-grid-dataitem"><?php print htmlentities($dset[$i]["catdescr"])." ".htmlentities($dset[$i]["partdescr"])." ".htmlentities($dset[$i]["footprint"]) ?></span>
+        <span class="text-element text-grid-dataitem">
+		<?php 
+		if ($dset[$i]["blvarid"] > 0)
+			print htmlentities($dset[$i]["catdescr"])." ".htmlentities($dset[$i]["partdescr"])." ".htmlentities($dset[$i]["footprint"])." [".htmlentities($dset[$i]["variantname"])."]";
+		else
+			print htmlentities($dset[$i]["catdescr"])." ".htmlentities($dset[$i]["partdescr"])." ".htmlentities($dset[$i]["footprint"]);
+		?>
+		</span>
       </div>
       <div class="container container-grid-dataitem-B0-<?php print $stline ?>">
         <span class="text-element text-grid-dataitem"><?php print htmlentities($dset[$i]["qty"]) ?></span>
@@ -668,7 +685,14 @@ else
         <a class="link-text link-grid-dataitem" href="javascript:popupOpener('pop-bomline.php<?php print "?assyid=".$assyid."&variantid=".$variantid."&bomid=".$dset[$i]["bomid"] ?>','pop_bomline',600,600)" title="View/Edit BOM line"><?php print htmlentities($dset[$i]["partnumber"]) ?></a>
       </div>
       <div class="container container-grid-dataitem-B0-<?php print $stline ?>">
-        <span class="text-element text-grid-dataitem"><?php print htmlentities($dset[$i]["catdescr"])." ".htmlentities($dset[$i]["partdescr"])." ".htmlentities($dset[$i]["footprint"]) ?></span>
+        <span class="text-element text-grid-dataitem">
+		<?php 
+		if ($dset[$i]["blvarid"] > 0)
+			print htmlentities($dset[$i]["catdescr"])." ".htmlentities($dset[$i]["partdescr"])." ".htmlentities($dset[$i]["footprint"])." [".htmlentities($dset[$i]["variantname"])."]";
+		else
+			print htmlentities($dset[$i]["catdescr"])." ".htmlentities($dset[$i]["partdescr"])." ".htmlentities($dset[$i]["footprint"]);
+		?>
+		</span>
       </div>
       <div class="container container-grid-dataitem-B0-<?php print $stline ?>">
         <span class="text-element text-grid-dataitem"><?php print htmlentities($dset[$i]["qty"]) ?></span>

@@ -67,6 +67,8 @@ interface iaxtparts
 	public function GetContact($dbh, $contid);
 	public function AddContactToCV($dbh, $cvid, $contactname);
 	public function AddNewCV($dbh, $cvname);
+	public function getVariantsForAssemblyPart($dbh, $partid);
+	public function getVariantDetails($dbh, $vid);
 	
 	public function FormRender_Tabs($params);
 
@@ -1246,7 +1248,76 @@ class axtparts implements iaxtparts
 			$rv["error"] = "No database connection.";
 		return $rv;
 	}
+	
+	
+	/**
+	* @return array or variantid's for the part if it is an assembly with BOM variants, otherwise false.
+	* @param resource $dbh. The databse connection.
+	* @param int $partid. The part ID to check
+	* @desc Checks to see if the specified partid is an assembly with at least one BOM variant. Returns a set of
+	* variantid for the different variants for the part as an array, or false if none
+	*/
+	public function
+	getVariantsForAssemblyPart($dbh, $partid)
+	{
+		$rv = false;
+		
+		if ($dbh)
+		{
+			// Is the part an assembly? 
+			$q = "select assyid "
+				. "\n from assemblies "
+				. "\n where partid='".$dbh->real_escape_string($partid)."' "
+				;
+			$s = $dbh->query($q);
+			if ($s)
+			{
+				$n = 0;
+				while ($r = $s->fetch_assoc())
+				{
+					// Check if there are variants for this assembly. A BOM must exist for each variant.
+					$qvar = "select distinct(bomvariants.variantid) as vid "
+						. "\n from boms " 
+						. "\n left join bomvariants on bomvariants.bomid=boms.bomid "
+						. "\n where assyid='".$dbh->real_escape_string($r["assyid"])."' "
+						;
+					$svar = $dbh->query($qvar);
+					if ($svar)
+					{
+						while ($rvar = $svar->fetch_assoc())
+						{
+							$rv[$n] = $rvar["vid"];
+							$n++;
+						}
+						$svar->free();
+					}
+				}
+				$s->free();
+			}
+		}
+		
+		return $rv;
+	}
 
+
+	public function
+	getVariantDetails($dbh, $vid)
+	{
+		$rv = false;
+		
+		if ($dbh)
+		{
+			$q = "select * from variant where variantid='".$dbh->real_escape_string($vid)."' ";
+			$s = $dbh->query($q);
+			if ($s)
+			{
+				$rv = $s->fetch_assoc();
+				$s->free();
+			}
+		}
+		
+		return $rv;
+	}
 	
 	/**
 	* @return void.

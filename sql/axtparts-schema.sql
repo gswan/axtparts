@@ -19,6 +19,7 @@ create table boms (
 	ref text,
 	um varchar(10),
 	alt int unsigned,
+	blvarid int unsigned default 0,
 	primary key(bomid),
 	index (partid),
 	index (assyid)

@@ -308,8 +308,8 @@ $url = $formfile.$urlargs;
         </select>
 	  </div>
       <div class="container container-pop-el">
-	    <label class="label label-formitem" form="form-assy" for="assyname">Assembly Name</label>
-		<input value="<?php print htmlentities($assyname) ?>" name="assyname" type="text" readonly class="input-formelement" form="form-assy" maxlength="100" title="Assembly Name">
+	    <label class="label label-formitem" form="form-assy" for="assyname">Assembly Part Name</label>
+		<input value="<?php print htmlentities($assyname) ?>" name="assyname" type="text" readonly class="input-formelement" form="form-assy" maxlength="100" title="Assembly Part Name">
 	  </div>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-assy" for="assydescr">Assembly Description</label>
@@ -328,7 +328,7 @@ if ($myparts->SessionMePrivilegeBit(UPRIV_ASSEMBLIES) === true)
 {
 ?>
       <div class="container container-pop-btn">
-	    <button type="submit" class="btn-pop-update" form="form-assy" formaction="<?php print $url ?>" value="Save" name="btn_update">Save</button>
+	    <button type="submit" class="btn-pop-update" form="form-assy" formaction="<?php print $url ?>" value="Save" name="btn_save">Save</button>
 <?php
 	if ($assyid !== false)
 	{
