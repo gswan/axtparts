@@ -307,10 +307,17 @@ $url = $formfile.$urlargs;
           <?php $myparts->RenderOptionList($list_parts, $partid, false) ?>
         </select>
 	  </div>
+<?php
+if ($assyid !== false)
+{
+?>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-assy" for="assyname">Assembly Part Name</label>
 		<input value="<?php print htmlentities($assyname) ?>" name="assyname" type="text" readonly class="input-formelement" form="form-assy" maxlength="100" title="Assembly Part Name">
 	  </div>
+<?php
+}
+?>
       <div class="container container-pop-el">
 	    <label class="label label-formitem" form="form-assy" for="assydescr">Assembly Description</label>
 		<input value="<?php print htmlentities($assydescr) ?>" name="assydescr" type="text" class="input-formelement" form="form-assy" maxlength="100" title="Assembly description" <?php print $readonly ?>>
