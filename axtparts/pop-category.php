@@ -215,8 +215,15 @@ $url = $formfile.$urlargs;
 		<input value="<?php print htmlentities($datadir) ?>" name="datadir" type="text" class="input-formelement" form="form-category" maxlength="100" title="Datasheet directory">
 	  </div>
       <div class="container container-pop-btn">
-	    <button type="submit" class="btn-pop-update" form="form-category" formaction="<?php print $url ?>" value="Update" name="btn_save" onclick="delClear()">Save</button>
-	    <button type="submit" class="btn-pop-delete" form="form-category" formaction="<?php print $url ?>" value="Delete" name="btn_delete"  onclick="delSet()">Delete</button>
+	    <button type="submit" class="btn-pop-update" form="form-category" formaction="<?php print $url ?>" value="Update" name="btn_save" id="btn_save" onclick="delClear()">Save</button>
+<?php 
+if ($catid !== false)
+{
+?>
+	    <button type="submit" class="btn-pop-delete" form="form-category" formaction="<?php print $url ?>" value="Delete" name="btn_delete" id="btn_delete" onclick="delSet()">Delete</button>
+<?php
+}
+?>
 	  </div>
     </form>
     <div class="rule rule-popsection">

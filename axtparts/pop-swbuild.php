@@ -293,12 +293,12 @@ if ($swbuildid !== false)
     <div class="container container-pop-text">
       <span class="text-element text-pop-dataitem">Assemblies referencing this software: <?php print $nb ?></span>
     </div>
-<?php
-}
-?>
     <div class="rule rule-popsection">
       <hr>
     </div>
+<?php
+}
+?>
   </div>
   <script src="js/jquery.min.js"></script>
   <script src="js/outofview.js"></script>

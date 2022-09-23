@@ -54,6 +54,21 @@ if (is_writeable(ENGDOC_DIR) === true)
 	$dset["engdoc"]["write"] = true;
 else
 	$dset["engdoc"]["write"] = false;
+	
+if (file_exists(MFGDOC_DIR))
+	$dset["mfgdoc"]["exists"] = true;
+else
+	$dset["mfgdoc"]["exists"] = false;
+
+if (is_readable(MFGDOC_DIR) === true)
+	$dset["mfgdoc"]["read"] = true;
+else
+	$dset["mfgdoc"]["read"] = false;
+
+if (is_writeable(MFGDOC_DIR) === true)
+	$dset["mfgdoc"]["write"] = true;
+else
+	$dset["mfgdoc"]["write"] = false;
 
 if (file_exists(DATASHEETS_DIR))
 	$dset["datasheet"]["exists"] = true;
@@ -164,6 +179,29 @@ else
 	print "<span class=\"text-element text-grid-testfail\">Readable [FAIL]</span>";
 
 if ($dset["engdoc"]["write"] === true)
+	print "<span class=\"text-element text-grid-testpass\">Writeable [OK]</span>";
+else
+	print "<span class=\"text-element text-grid-testfail\">Writeable [FAIL]</span>";
+?>
+      </div>
+    </div>
+    <div class="container container-grid-data-sys">
+      <div class="container container-grid-dataitem-B0-odd">
+        <span class="text-element text-grid-dataitem"><?php print "Directory: ".MFGDOC_DIR ?></span>
+      </div>
+      <div class="container container-grid-dataitem-B0-odd">
+<?php 
+if ($dset["mfgdoc"]["exists"] === true)
+	print "<span class=\"text-element text-grid-testpass\">Exists [OK]</span>";
+else
+	print "<span class=\"text-element text-grid-testfail\">Exists [FAIL]</span>";
+		
+if ($dset["mfgdoc"]["read"] === true)
+	print "<span class=\"text-element text-grid-testpass\">Readable [OK]</span>";
+else
+	print "<span class=\"text-element text-grid-testfail\">Readable [FAIL]</span>";
+
+if ($dset["mfgdoc"]["write"] === true)
 	print "<span class=\"text-element text-grid-testpass\">Writeable [OK]</span>";
 else
 	print "<span class=\"text-element text-grid-testfail\">Writeable [FAIL]</span>";
