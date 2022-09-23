@@ -59,11 +59,11 @@ if (isset($_GET['pg']))
 if (!is_numeric($pg))
 	$pg = 0;
 	
-$sc = 1;
+$sc = 3;
 if (isset($_GET['sc']))
 	$sc = trim($_GET["sc"]);
 if (!is_numeric($sc))
-	$sc = 1;
+	$sc = 3;
 	
 $fc = false;
 if (isset($_GET['fc']))
