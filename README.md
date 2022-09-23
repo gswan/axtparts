@@ -49,14 +49,14 @@ This method is used to allow updated versions to be retrieved into separate dire
 **Using git to clone the repository**
 ```
 # cd /opt
-# git clone https://github.com/gswan/axtparts.git axtparts4
-# cd axtparts4
+# git clone https://github.com/gswan/axtparts.git
+# cd axtparts
 ```
 **Using a source tarball**
 ```
 # cd /opt
-# $ tar -xf axtparts-4.0.tar.gz 
-# cd axtparts4
+# $ tar -xf axtparts-4.0.1.tar.gz 
+# cd axtparts
 ```
 
 
@@ -64,7 +64,7 @@ This method is used to allow updated versions to be retrieved into separate dire
 
 * Create the database using the database schema file
 ```
-# cd /opt/axtparts4/sql
+# cd /opt/axtparts/sql
 # mysql -uroot -p < axtparts-schema.sql
 ```
 * Import the initial data. 
@@ -89,7 +89,7 @@ mysql> exit;
 
 
 **3. Web application.**
-Edit the config file in /opt/axtparts4/axtparts/config/config-axtparts.php to set the correct database connection parameters. 
+Edit the config file in /opt/axtparts/axtparts/config/config-axtparts.php to set the correct database connection parameters. 
 Other configuration parameters can also be set here (company information and partprefix).
 ```
 define ("PARTSUSER", "axtpartsuser");
@@ -101,12 +101,12 @@ define ("PARTSDBASE", "axtparts");
 Link the web application into the web docroot for your apache server. 
 In this example we are using /var/www/https as the docroot for the http-ssl server.
 ```
-# cd /opt/axtparts4
+# cd /opt/axtparts
 # mkdir -pv datasheets
 # mkdir -pv /var/axtparts/{swimages,engdocs,mfgdocs}
-# chown -R apache.apache /opt/axtparts4/axtparts/datasheets
+# chown -R apache.apache /opt/axtparts/axtparts/datasheets
 # chown -R apache.apache /var/axtparts
-# ln -s /opt/axtparts4/axtparts /var/www/axtparts
+# ln -s /opt/axtparts/axtparts /var/www/axtparts
 ```
 Now you should be able to use your web browser to connect to the site and log in using the default admin user and password.
 
@@ -122,22 +122,22 @@ mysql> alter table boms add column blvarid int unsigned default 0;
 **Using git to clone the repository**
 ```
 # cd /opt
-# git clone https://github.com/gswan/axtparts.git axtparts4
-# cd axtparts4
+# git clone https://github.com/gswan/axtparts.git
+# cd axtparts
 ```
 **Using a source tarball**
 ```
 # cd /opt
 # tar -xf axtparts-4.0.1.tar.gz 
-# cd axtparts4
+# cd axtparts
 ```
 Copy the existing datasheets directory to the new application. 
 It is assumed here that the existing application is in /var/www/https/axtparts/
 ```
-# cp -a /var/www/https/axtparts/datasheets /opt/axtparts4/axtparts/datasheets
+# cp -a /var/www/https/axtparts/datasheets /opt/axtparts/axtparts/datasheets
 ```
 
-Edit the config file in /opt/axtparts4/axtparts/config/config-axtparts.php to set the correct database connection parameters. 
+Edit the config file in /opt/axtparts/axtparts/config/config-axtparts.php to set the correct database connection parameters. 
 These and other configuration parameters can be copied from your existing installation config file.
 ```
 define ("PARTSUSER", "axtpartsuser");
@@ -149,9 +149,9 @@ define ("PARTSDBASE", "axtparts");
 Link the web application into the web docroot for your apache server. In this example we are using /var/www/https as the docroot for the http-ssl server.
 Since the existing application is located in axtparts/ we will move this to axtparts3/ and link the new installation to axtparts/
 ```
-# cd /opt/axtparts4
+# cd /opt/axtparts
 # mv /var/www/https/axtparts /var/www/https/axtparts3
-# ln -s /opt/axtparts4/axtparts /var/www/axtparts
+# ln -s /opt/axtparts/axtparts /var/www/axtparts
 ```
 Now you should be able to use your web browser to connect to the site and log in using existing user credentials.
 
