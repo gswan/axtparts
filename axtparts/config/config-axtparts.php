@@ -10,7 +10,7 @@ if (!defined("_AXTPARTSDEFS"))
 {
 	define ("_AXTPARTSDEFS", true);
 	
-	define ("ENGPARTSVERSION", "4.01");
+	define ("ENGPARTSVERSION", "4.02");
 	
 	// the database user information
 	define ("PARTSUSER", "axtpartsuser");
