@@ -222,7 +222,7 @@ if (($fc !== false) && ($fc != ""))
   <div class="container container-body">
     <div class="container container-header">
       <div class="container container-head-left">
-        <span class="text-element text-head-siteheading">Engineering Parts System</span>
+        <span class="text-element text-head-siteheading"><?php print SYSTEMHEADING ?></span>
         <span class="text-element text-head-pagetitle">Data Sheets</span>
       </div>
       <div class="container container-head-right">

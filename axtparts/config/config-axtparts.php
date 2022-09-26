@@ -50,7 +50,7 @@ if (!defined("_AXTPARTSDEFS"))
 	define ("MAX_DATASHEET_UPLOAD_SIZE", 20000000);
 	
 	// These appear at the bottom of the forms, along with the version number
-	define("SYSTEMHEADING", "Engineering Parts Database");
+	define("SYSTEMHEADING", "Engineering Parts System");
 	define("SYSTEMBRANDING", "AXT Systems");
 	
 	// Address type
