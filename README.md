@@ -16,7 +16,7 @@ It allows you to take a completed circuit diagram and enter new parts, check exi
 Datasheets for components can be uploaded into the system, allowing quick access from a single place if you are working in a lab. Engineering documents (schematics and PCB overlays etc) can be uploded so they are also available from the same interface.
 
 ## Demo Site
-A demonstration site exists at https://axtsystems.com/axtparts/
+A demonstration site exists at https://axtsystems.com/axtparts/index.php
 
 Login with username 'demo' and password 'axtpartsdemo'. The database is periodically flushed and reloaded to remove any junk.
 
