@@ -234,7 +234,7 @@ $q_assy = "select assyid, "
 		. "\n partnumber "
 		. "\n from assemblies "
 		. "\n left join parts on parts.partid=assemblies.partid "
-		. "\n order by assydescr "
+		. "\n order by partdescr "
 		;
 		
 $s_assy = $dbh->query($q_assy);
